@@ -130,22 +130,22 @@ def find_indices_ngram_doc(strngram,docnum):
 
 
 
-print('start creating final_dict')
-final_dict=create_list_of_dict_global(8,corpus)
-print('finished creating final_dict')
+print('start creating dizzo')
+dizzo=create_list_of_dict_global(8,corpus)
+print('finished creating dizzo')
 
 
-def create_glue_and_tfidfmod_and_probs(final_dict1,gluename,corpus):
+def create_glue_and_tfidfmod_and_probs(dizzo1,gluename,corpus):
     num_total_docs=len(corpus)
-    final_dict2 = []
-    final_dict3 = []
-    #final_dict4 = []
+    dizzo2 = []
+    dizzo3 = []
+    #dizzo4 = []
     if gluename=='Dice':
-        for ngram in range(1, len(final_dict1)):
-            g = dict(final_dict1[ngram - 1])
-            g2 = dict(final_dict1[ngram - 1])
-            #g3= dict(final_dict1[ngram - 1])
-            for keys, value in final_dict1[ngram - 1].items():
+        for ngram in range(1, len(dizzo1)):
+            g = dict(dizzo1[ngram - 1])
+            g2 = dict(dizzo1[ngram - 1])
+            #g3= dict(dizzo1[ngram - 1])
+            for keys, value in dizzo1[ngram - 1].items():
                 if not(ngram==1 and len(keys)<3):
                     tfidf_mod=[]
                     probs=[]
@@ -173,8 +173,8 @@ def create_glue_and_tfidfmod_and_probs(final_dict1,gluename,corpus):
                         key = str_to_list(keys)
                         somma = 0
                         for i in range(len(key) - 1):
-                            f1 = final_dict1[i][list_to_str(key[:i + 1])][0]
-                            f2 = final_dict1[ngram - i - 2][list_to_str(key[i + 1:])][0]
+                            f1 = dizzo1[i][list_to_str(key[:i + 1])][0]
+                            f2 = dizzo1[ngram - i - 2][list_to_str(key[i + 1:])][0]
                             somma += (f1 + f2) / (ngram - 1)
                         g[keys].append((2 * num) / somma)
                         g2[keys].append((2 * num) / somma)
@@ -190,15 +190,15 @@ def create_glue_and_tfidfmod_and_probs(final_dict1,gluename,corpus):
                     g2.pop(keys)
                     #g3.pop(keys)
 
-            final_dict2.append(g)
-            final_dict3.append(g2)
+            dizzo2.append(g)
+            dizzo3.append(g2)
 
     elif gluename == 'SCP':
-        for ngram in range(1, len(final_dict1)):
-            g = dict(final_dict1[ngram - 1])
-            g2 = dict(final_dict1[ngram - 1])
-            # g3= dict(final_dict1[ngram - 1])
-            for keys, value in final_dict1[ngram - 1].items():
+        for ngram in range(1, len(dizzo1)):
+            g = dict(dizzo1[ngram - 1])
+            g2 = dict(dizzo1[ngram - 1])
+            # g3= dict(dizzo1[ngram - 1])
+            for keys, value in dizzo1[ngram - 1].items():
                 if not (ngram == 1 and len(keys) < 3):
                     tfidf_mod = []
                     probs = []
@@ -227,8 +227,8 @@ def create_glue_and_tfidfmod_and_probs(final_dict1,gluename,corpus):
                         key = str_to_list(keys)
                         somma = 0
                         for i in range(len(key) - 1):
-                            f1 = final_dict1[i][list_to_str(key[:i + 1])][0]
-                            f2 = final_dict1[ngram - i - 2][list_to_str(key[i + 1:])][0]
+                            f1 = dizzo1[i][list_to_str(key[:i + 1])][0]
+                            f2 = dizzo1[ngram - i - 2][list_to_str(key[i + 1:])][0]
                             somma += (f1*f2) / (ngram - 1)
                         g[keys].append((num**2) / somma)
                         g2[keys].append((num**2) / somma)
@@ -244,16 +244,16 @@ def create_glue_and_tfidfmod_and_probs(final_dict1,gluename,corpus):
                     g2.pop(keys)
                     # g3.pop(keys)
 
-            final_dict2.append(g)
-            final_dict3.append(g2)
-            #final_dict4.append(g3)
+            dizzo2.append(g)
+            dizzo3.append(g2)
+            #dizzo4.append(g3)
 
     elif gluename == 'MI':
-        for ngram in range(1, len(final_dict1)):
-            g = dict(final_dict1[ngram - 1])
-            g2 = dict(final_dict1[ngram - 1])
-            # g3= dict(final_dict1[ngram - 1])
-            for keys, value in final_dict1[ngram - 1].items():
+        for ngram in range(1, len(dizzo1)):
+            g = dict(dizzo1[ngram - 1])
+            g2 = dict(dizzo1[ngram - 1])
+            # g3= dict(dizzo1[ngram - 1])
+            for keys, value in dizzo1[ngram - 1].items():
                 if not (ngram == 1 and len(keys) < 3):
                     tfidf_mod = []
                     probs = []
@@ -282,8 +282,8 @@ def create_glue_and_tfidfmod_and_probs(final_dict1,gluename,corpus):
                         key = str_to_list(keys)
                         somma = 0
                         for i in range(len(key) - 1):
-                            f1 = final_dict1[i][list_to_str(key[:i + 1])][0]
-                            f2 = final_dict1[ngram - i - 2][list_to_str(key[i + 1:])][0]
+                            f1 = dizzo1[i][list_to_str(key[:i + 1])][0]
+                            f2 = dizzo1[ngram - i - 2][list_to_str(key[i + 1:])][0]
                             somma += (f1*f2) / (ngram - 1)
                         g[keys].append(np.log(num / somma))
                         g2[keys].append(np.log(num / somma))
@@ -299,24 +299,24 @@ def create_glue_and_tfidfmod_and_probs(final_dict1,gluename,corpus):
                     g2.pop(keys)
                     # g3.pop(keys)
 
-            final_dict2.append(g)
-            final_dict3.append(g2)
-            #final_dict4.append(g3)
+            dizzo2.append(g)
+            dizzo3.append(g2)
+            #dizzo4.append(g3)
 
-    return final_dict2,final_dict3
+    return dizzo2,dizzo3
 
 print('start creating glue and tfidfmod_and_probs')
-glues,probs= create_glue_and_tfidfmod_and_probs(final_dict,'SCP',corpus)
+glues,probs= create_glue_and_tfidfmod_and_probs(dizzo,'SCP',corpus)
 print('finished creating glue and tfidfmod')
 
 print('start creating fathers')
 fathers = []
 for ngram in range(1, 8):
-    father = dict(final_dict[ngram - 1])
+    father = dict(dizzo[ngram - 1])
     for key, value in father.items():
         father[key] = []
 
-    for keys, value in final_dict[ngram].items():
+    for keys, value in dizzo[ngram].items():
         key = str_to_list(keys)
         subkey1 = list_to_str(key[1:])
         subkey2 = list_to_str(key[:-1])
@@ -328,13 +328,13 @@ for ngram in range(1, 8):
 print('finished creating fathers')
 
 def pi(rel,num_doc):
-    for i in range(1,len(final_dict[len(str_to_list(rel))-1][rel])):
-        if(final_dict[len(str_to_list(rel))-1][rel][i]==num_doc):
+    for i in range(1,len(dizzo[len(str_to_list(rel))-1][rel])):
+        if(dizzo[len(str_to_list(rel))-1][rel][i]==num_doc):
             if(i%2==1):
-               return final_dict[len(str_to_list(rel))-1][rel][i+1]/(len(corpus[i%2-1]))
+               return dizzo[len(str_to_list(rel))-1][rel][i+1]/(len(corpus[i%2-1]))
     return 0
 
-def find_RE(final_dict1,w,w2):
+def find_RE(dizzo1,w,w2):
     re_tfidf = {}
     re_probs= {}
     #re_positions={}
@@ -384,7 +384,7 @@ def find_RE(final_dict1,w,w2):
 
 
 print('start finding RE')
-retfidf,reprobs= find_RE(final_dict, glues,probs)
+retfidf,reprobs= find_RE(dizzo, glues,probs)
 print('finished finding RE')
 
 with open('RE_SCP_corpus2mw_unfiltered.txt', 'w') as f:
@@ -414,7 +414,7 @@ def is_okay(rel):
 
 
 def is_okay2(rel):
-    if (final_dict[len(str_to_list(rel)) - 1][rel][0] > 1):
+    if (dizzo[len(str_to_list(rel)) - 1][rel][0] > 1):
         return True
     else:
         return False
